@@ -1,0 +1,2 @@
+module ProtospaceControllerForceHelper
+end
