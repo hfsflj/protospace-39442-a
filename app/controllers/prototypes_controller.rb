@@ -16,7 +16,7 @@ class PrototypesController < ApplicationController
     @prototype.user_id = current_user.id
 
     if @prototype.save
-        redirect_to root_pat, notice: 'Prototype and Comment were successfully created.'
+        redirect_to root_path, notice: 'Prototype and Comment were successfully created.'
       else
         render :new
     end
