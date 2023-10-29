@@ -14,12 +14,15 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: 
   socket: /tmp/mysql.sock
+  host: localhost
+  database: protospace_39422_development
 
 development:
   <<: *default
   database: protospace_39442_development
+  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -52,3 +55,29 @@ production:
   database: protospace_39442_production
   username: protospace_39442
   password: <%= ENV['PROTOSPACE_39442_DATABASE_PASSWORD'] %>
+
+
+  default: &default
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  adapter: mysql2
+  username: root
+  password:
+  host: localhost
+  database: protospace_39422_development
+
+test:
+  <<: *default
+  adapter: mysql2
+  username: root
+  password:
+  host: localhost
+  database: protospace_39422_test
+
+production:
+  <<: *default
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
