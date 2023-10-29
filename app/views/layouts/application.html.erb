@@ -22,10 +22,7 @@
             <% if user_signed_in? %>
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: :nav__logout %>
               <%= link_to "New Proto", new_prototype_path, class: :nav__btn %>
-              <div class="nav__user">
-                  <% if current_user %>
-                    <p class="greeting">
-                  <% end %>
+              
               </div>
             <% else %>
               <%= link_to "ログイン", new_user_session_path, class: :nav__btn %>
