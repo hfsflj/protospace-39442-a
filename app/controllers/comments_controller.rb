@@ -4,20 +4,39 @@ class CommentsController < ApplicationController
   #   @comments = Comment.all
   # end
 
-
   def create
-    @prototype = Prototype.find(params[:prototype_id])
-    @prototypes=Prototype.all
-    @comment = @prototype.comments.new(comment_params)
-
+    @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to prototype_path(@comment.prototype) 
-  
+      redirect_to prototype_path(@comment.prototype)
     else
+      @prototype =  @comment.prototype
       @comments = @prototype.comments
-      render template: "prototypes/show"
+      # binding.pry
+      render "prototypes/show"
     end
   end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:content).merge(user_id: current_user.id, prototype_id: params[:prototype_id])
+  end
+# end
+
+  # def create
+  #   @prototype = Prototype.find(params[:prototype_id])
+  #   @prototypes=Prototype.all
+  #   @comment = @prototype.comments.new(comment_params)
+
+  #   if @comment.save
+  #     redirect_to prototype_path(@comment.prototype) 
+  
+  #   else
+  #     @comments = @prototype.comments
+  #     binding.pry
+  #     render template: "prototypes/show"
+  #   end
+  # end
 
   # def show
   #   @comment = Comment.find(params[:id])
@@ -25,13 +44,13 @@ class CommentsController < ApplicationController
   # @comment = Comment.new 
   # end
 
-  private
+  # private
   def prototype_params
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image)
   end
   
 
-  def comment_params
-    params.require(:comment).permit(:content).merge(user_id: current_user.id)
-  end
+  # def comment_params
+  #   params.require(:comment).permit(:content).merge(user_id: current_user.id)
+  # end
 end
