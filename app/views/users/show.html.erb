@@ -32,7 +32,7 @@
         <% @user.prototypes.each do |prototype| %>
           <div class="prototype-card">
             <h3><%= prototype.title %></h3>
-            <p><%= prototype.image %></p>
+            <p><%=image_tag prototype.image %></p>
           </div>
         <% end %>
       </div>
