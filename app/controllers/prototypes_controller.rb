@@ -1,6 +1,7 @@
 class PrototypesController < ApplicationController
 
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  
 
   def index
     @prototypes = Prototype.all
@@ -57,4 +58,7 @@ class PrototypesController < ApplicationController
   def prototype_params
     params.require(:prototype).permit(:content, :title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
+
+ 
+
 end
